@@ -22,12 +22,20 @@ This repository contains the analysis code from my Master's thesis. The thesis w
 
 ## Data
 
-The real data are not included in this repository, to protect participant privacy. The data folder contains only a description of the file format. To run the code, create four CSV files in `data/` as described in `data/README.md`. You can use your own data in the same format, or create random dummy files with `make_dummy_data.py` to test that the code runs. Results from dummy data have no meaning.
+The real data are not included in this repository, to protect participant privacy. The four data arrays at the top of `analysis.py` are empty, so the script will stop with a message until you add data.
+
+To run the analysis, paste your own data into the four arrays, in this format:
+
+| Array | Shape | Values |
+|---|---|---|
+| `SUS_P1`, `SUS_P2` | participants x 10 | integers 1 to 5, entered as answered (the script does the reverse scoring) |
+| `UEQ_P1`, `UEQ_P2` | participants x 26 | integers -3 to +3, already recoded so that higher is always more positive |
+
+Each row is one participant. The row order must be the same in all four arrays, because the comparison is within-subjects (paired). The UEQ items must be in the standard UEQ-26 order, because the scale mapping in the script uses item positions.
 
 ## How to run
 
 ```bash
-pip install -r requirements.txt
-python make_dummy_data.py     # optional, only to test the code
-python src/analysis.py
+pip install numpy scipy
+python analysis.py
 ```
